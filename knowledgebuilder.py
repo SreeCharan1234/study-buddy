@@ -1,9 +1,8 @@
 from pathlib import Path
-from googletrans import Translator
 import speech_recognition as sr
 import pdf2image
 import gtts
-import playsound
+
 from streamlit_ace import st_ace
 from PIL import Image
 import base64
@@ -23,7 +22,6 @@ import requests
 import sys
 import io
 from streamlit_webrtc import webrtc_streamer, VideoProcessorBase
-import speech_recognition as sr
 from youtube_transcript_api import YouTubeTranscriptApi
 import time
 global s
@@ -76,7 +74,7 @@ interview_topics = [
     "Open-source contributions",
     "Soft skills (communication, teamwork, leadership)"
 ]
-st.set_page_config(page_title="Resume", page_icon='chart_with_upwards_trend', layout="wide", initial_sidebar_state="auto", menu_items=None)
+st.set_page_config(page_title="KnowledgeBuilder", page_icon='chart_with_upwards_trend', layout="wide", initial_sidebar_state="auto", menu_items=None)
 EXAMPLE_NO = 1
 is_listening = False
 recognizer = sr.Recognizer()
@@ -205,26 +203,56 @@ if selected == "Road Map":
         st.lottie(l, height=100, width=100)
     with col2:
         st.header(f":rainbow[Get Your Personalised Roadmap]😎🧑‍🏫", divider='rainbow')
-        
-    
-    
-
     with st.form(key='survey_form'):
         col1, col2 = st.columns(2)  # Create two columns
-
         with col1:
             text_stack_placeholder = pseudo_bold("Known Tech Stacks")
             text_know = st.multiselect("Tech Stacks You Already Know", t, [], placeholder="choose tech stacks")
-            year = st.radio("Which year you are in", ("1st year 🥳", "2nd year 😃", "3rd year 😊","4th year  🎓"))
-        
         with col2:
-            End_Gole = st.multiselect("What is your End Goal ?", t, [], placeholder="choose end goal")
+            End_Gole = st.multiselect("What is your End Goal ?", t, [], placeholder="choose end goal")    
+        col1, col2 ,col3= st.columns(3)  # Create two columns
+        with col1:
+            year=st.radio("Which year you are in", ("1st year 🥳", "2nd year 😃", "3rd year 😊","4th year  🎓"))
+        with col2:
+            learning_speed = st.radio("How would you describe your learning speed?", ("Fast learner🚀", "Medium learner🚣‍♀️", "Slow learner🐢"))
+        with col3:
             difficulty = st.radio("At what level do you want to learn?", ("Beginner😃🟢", "Intermediate🙂🟡", "Advanced😎🔴"))
         result = date_range_picker("Select a date range")
         submit_button = st.form_submit_button(label='Submit')
     if submit_button:
         with st.spinner("Analyzing..."):
-            s="So now take a role of expert road map desiesner for engiernieg students and now my  end gole is to learn " + str(End_Gole)+"i want to complete this my end gole in "+ str(result)+"i only want to lean till the "+str(difficulty)+"am i am now in "+str(year)+"from these imformation give me proper road map which include the resouce(youtube channels) the time line to each topic in deatle and also tell how much time should i give to each day to  complete that task  and sove leatcode questions which are importatnt add imogies and make your reslut in organised manner  and if possible also make a table to represent all the data  "
+            role = """
+            You are a highly skilled AI trained to Make a Proper Roda Map personalised road map for college students  . You are a professional and your Road Map should be constructive and helpful.
+            """
+            instructions = f"""
+            student Name : K Sree Charan
+            like the student {text_know} and  it is his end goal to achive after foolwing you road map is {End_Gole}  and the student is a {year}  and his learning spped is {learning_speed} and he want to achive the gola at this levl{difficulty} and this all must be completed in the duration {result}
+            Your job is to proved a Proper Road Map and personalised :
+            
+           
+            1. In this section you have to provide me:-
+                    in a table format :-
+                        1. sno
+                        2. topic name for each day
+                        3. leet code question name (name of the question) on that at least 2 
+                        4. Youtube link to study that 
+            2. 
+                Give :
+                    some likes of youtube  form which take take refreese  both englis and hindi channeld first engilsh and second hindi 
+            3. Give :
+                some webstie link where he can read rome about the pyhton conetps
+            4.
+                give:
+                    some books name where he can study 
+            5.
+                any addition imformation you give which will be help full for the studes 
+            6.
+            Final review:
+
+            At the end give a final review addition tips to while following this road Map. 
+            """
+            s = role + instructions 
+            
             s=get_gemini_response(s)
             st.write(s)
 if selected == "AI Bot":
@@ -255,111 +283,92 @@ if selected=="Code Editor":
     with col1:
         st.lottie(l, height=100, width=100)
     with col2:
-        st.header(f":rainbow[Code Editor]👨‍💻", divider='rainbow')
-    if k==0:
-        
-        st.markdown("""
-        <style>
-        .stButton>button, .stTextInput>div>div>input {
-            margin: 0 10px 0 0;
-            padding: 10px 20px;
-            font-size: 16px;
-            font-weight: bold;
-            color: white;
-            background-color: #007BFF;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-        .stButton>button:hover {
-            background-color: #0056b3;
-        }
-        .button-container {
-            display: flex;
-            justify-content: flex-start;
-            align-items: center;
-        }
-        .stTextInput>div>div>input {
-            margin-right: 10px;
-            background-color: white;
-            color: black;
-            border: 1px solid #ccc;
-        }
-        </style>
-        """, unsafe_allow_html=True)
+        st.header(f":rainbow[Code Editor]👨‍💻", divider='rainbow')      
     python_code = """def sum_of_list(l):
-            
-    print(sum(l))
-sum_of_list([5, 3,4,4])      
-    """
+        print(sum(l))
+sum_of_list([5,3,4,4])"""
+    java_code = """public class SumOfList {
+        public static void main(String[] args) {
+            int[] numbers = {5, 3, 4, 4};
+            int sum = 0;
+            for (int number : numbers) {
+                sum += number;
+            }
+            System.out.println(sum);
+        }
+    }"""
+    cpp_code = """#include <iostream>
 
-    javascript_code = """
-    function myFunction(x, y) {
-    // Print the sum of x and y
-    console.log(x + y);
-    }
+    using namespace std;
 
-    myFunction(5, 3);
-    """
+    int main() {
+        int numbers[] = {5, 3, 4, 4};
+        int sum = 0;
+        for (int i = 0; i < sizeof(numbers) / sizeof(numbers[0]); i++) {
+            sum += numbers[i];
+        }
+        cout << sum << endl;
+        return 0;
+    }"""
 
     # Select language
-    selected_lang = st.sidebar.selectbox("Language", ["Python", "JavaScript"])
+    selected_lang = st.sidebar.selectbox("Language", ["Python", "Java", "C++"])
 
     # Set session state
     st.session_state["selected_lang"] = selected_lang
+    s=""
+    with st.container(border=True):
+        with st.container(border=True):
+            if selected_lang == "Python":
+                editor_content = st_ace(value=python_code, language='python', theme='monokai', keybinding='vscode', font_size=14,key='run-code')
+            elif selected_lang == "Java":
+                editor_content = st_ace(value=java_code, language='java', theme='monokai', keybinding='vscode', font_size=14)
+            elif selected_lang == "C++":
+                editor_content = st_ace(value=cpp_code, language='cpp', theme='monokai', keybinding='vscode', font_size=14)
+            else:
+                st.write("Unsupported language selected.")
+        with st.container(border=True):  
+            col1, col2, col3, col4= st.columns([1,1,1,2])
+            with col1:
+                if st.button("Debug My code ",type="primary", help="Debug your code",use_container_width=True):
+                    s="Debug  my code  "+str(editor_content)+"explain where I have done wrong and correcty and write the whole correct code again "
+                    s=get_gemini_response(s)
+                    #st.write(s)                   
+            with col2:
+                if st.button("Explain whole Code",type="primary", help="Explain the Code",use_container_width=True):
+                    s="Explain  my code  "+str(editor_content)+"explain where I have done wrong and exaplin like you are explain to a noob"
+                    s=get_gemini_response(s)        
+            with col3:
+                if st.button("Time Complexity",type="primary", help="Time complexity",use_container_width=True):
+                    s="Tell the time COmplextiy   "+str(editor_content)+"explain who the time complixity is correct "
+                    s=get_gemini_response(s)
+                    #st.write(s)
+            with col4:
 
-    # Conditionally display code editor
-    if selected_lang == "Python":
-        editor_content = st_ace(value=python_code, language='python', theme='monokai', keybinding='vscode', font_size=14)
-    elif selected_lang == "JavaScript":
-        editor_content = st_ace(value=javascript_code, language='javascript', theme='monokai', keybinding='vscode', font_size=14)
-    else:
-        st.write("Unsupported language selected.")
-
-    col1, col2,col3 = st.columns([6,1, 1])
-    # JavaScript to simulate button click on Ctrl + Enter
-    st.markdown("""
-    <script>
-    document.addEventListener('keydown', function(event) {
-        if (event.ctrlKey && event.key === 'Enter') {
-            document.getElementById('run-code').click();
-        }
-    });
-    </script>
-    """, unsafe_allow_html=True)
-    st.markdown('<div class="button-container">', unsafe_allow_html=True)
-    
-    with col1:
-       text_input = st.text_input("Enter text here:")
-    
-    with col2:
-        if st.button("🎤 Mic"):
-            is_listening = True
-            voice_input = recognize_speech_from_microphone()
-
-            if voice_input:
-                text_input = voice_input  # Update text input with recognized speech
-            is_listening = False
-        # Hidden run button
-       
-    with col3:
-
-    # Run Code button
-        run_button = st.button("Run Code", key='run-code')
-
-        st.markdown('</div>', unsafe_allow_html=True)
-
-    st.markdown('<button id="run-code" style="display: none;">Hidden Run Button</button>', unsafe_allow_html=True)
-    
-    # Capture and display the output when the button is clicked
-    if run_button:
-        # Redirect stdout to capture print statements
+                p=st.multiselect("Convert Code into", ["C++","Python","Java"], [], placeholder="Choose Language")
+                if p:
+                    s="convert  the  whole code into the language "+str(p)+str(editor_content)+"explain"
+                    s=get_gemini_response(s)
+        
+        with st.container(border=True): 
+            col1, col2 = st.columns([6,1])  
+            with col1:
+                text_input = st.text_input("This is a placeholder",
+        key="placeholder",)
+            with col2:
+                if st.button("🎤 Mic",type="primary", help="Speeck Now",use_container_width=True):
+                    is_listening = True
+                    voice_input = recognize_speech_from_microphone()
+                    if voice_input:
+                        text_input = voice_input  
+                    is_listening = False
+            
+                
+        
+    if editor_content:
         output = io.StringIO()
         sys.stdout = output
-
         try:
-            # Execute the code from the editor
             exec(editor_content)
         except Exception as e:
             # Capture any exceptions
@@ -381,6 +390,8 @@ sum_of_list([5, 3,4,4])
         s=s[9:-3]
         
         editor_content = st_ace(value=str(s), language='python', theme='monokai', keybinding='vscode', font_size=14)
+    
+    st.write(s)
 if selected == "Mock Interview":
     link="https://lottie.host/299688b5-e6b2-48ad-b2e9-2fa14b1fb117/TXqg2APXpL.json"
     l=load_lottieurl(link)
@@ -389,17 +400,23 @@ if selected == "Mock Interview":
         st.lottie(l, height=100, width=100)
     with col2:
         st.header(f":rainbow[Mock Interview]💻💻", divider='rainbow')
-    col1, col2 = st.columns([1,1])   
-    with col1:
-        text = st.multiselect("Which topic you want to practice ",interview_topics,[],placeholder="Choose the topic")
-        video_link = st.text_input(" Enter the video link",placeholder="Enter the url")    
-        uploaded_file=st.file_uploader("Upload your study Material (PDF)",type=["pdf"])
-    with col2:
-        # Camera setup
-        webrtc_streamer(key="sample") 
+    with st.container(border=True):  
+        col1, col2 = st.columns([1,1])   
+
+        with col1:
+            with st.container(border=True):    
+                text = st.multiselect("Which topic you want to practice ",interview_topics,[],placeholder="Choose the topic")
+                video_link = st.text_input(" Enter the video link",placeholder="Enter the url")    
+                uploaded_file=st.file_uploader("Upload your study Material (PDF)",type=["pdf"])
+                geratequestion=st.button("Generate question",type="primary", help="Gerate your question",use_container_width=True)
+                button=st.button("🎤Speak now",type="primary", help="Speak Now",use_container_width=True)
+        with col2:
+            with st.container(border=True):
+                webrtc_streamer(key="sample") 
+                ques=st.multiselect("Type of Question ? ", ["MCQ","Codding","Oral"], [], placeholder="Choose Language")
     s=""
     text_input=""
-    if st.button("Generate question"):
+    if geratequestion:
             if video_link :    
                 transcript = get_transcript(video_link)
                 s=""
@@ -410,19 +427,19 @@ if selected == "Mock Interview":
                     except KeyError:
                         print(f"Segment with missing end time: Text: {segment['text']}")
                 s=s+str(text)
-                s=s+"this is tracprit of yout which i have studing now form this ask me 1 question based on the interview  it should now be mcq and it can be answer by only mic and  dont give answer i have to proctive fro my self "
+                s=s+"this is tracprit of yout which i have studing now form this ask me best  question based on the tracrpit  it should be type keep in mind only give qusetion "+str(ques)
                 s=get_gemini_response(s)
             if text:
-                s=str(text)+"from  this is of topic yout which i have studing now form this ask me 1 question based on the interview " 
+                s=str(text)+"from  this is of topic yout which i have studing now form this ask me 1 question ask me best  question based on the tracrpit  it should be type keep in mind only give queston "+str(ques)
                 s=get_gemini_response(s)
             if uploaded_file:
                 if uploaded_file is not None:
                     st.write("PDF Uploaded Successfully")
                     pdf_content=input_pdf_setup(uploaded_file) 
-                    s=get_gemini_response1("from the content make a question",pdf_content,"it should not be mcq type question")
+                    s=get_gemini_response1("from the content make a question",pdf_content,"ask me best  question based on the tracrpit  it should be type keep in mind only give question" +str(ques))
             st.session_state["q"]= s
     
-    if st.button("🎤Speak now"):
+    if button:
             is_listening = True
             voice_input = recognize_speech_from_microphone()
             st.write(st.session_state["q"])
@@ -442,7 +459,6 @@ if selected == "Mock Interview":
         s=get_gemini_response(s)
         st.write(s)
     
-        
 
     
     
