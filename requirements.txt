@@ -13,3 +13,4 @@ youtube-transcript-api
 streamlit-option-menu
 streamlit-webrtc
 seaborn
+streamlit_shadcn_ui
