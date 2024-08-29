@@ -12,3 +12,4 @@ requests
 youtube-transcript-api
 streamlit-option-menu
 streamlit-webrtc
+seaborn
