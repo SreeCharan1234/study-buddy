@@ -1,5 +1,5 @@
 # Study -Buddy
-## Link : https://q2chpaks9kddgup3wzedxh.streamlit.app/
+## Link : study--buddy.streamlit.app/
 
 ## Personalised Road Map 
 ![image](https://github.com/user-attachments/assets/98793a93-b9ed-4798-9f76-689c835f3e3b)
