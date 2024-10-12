@@ -27,7 +27,7 @@ import time
 global s
 k=0
 os.getenv("AIzaSyCoc7UW6p0Xj7At538R3oMYkfxG7bSLuaU")
-genai.configure(api_key="AIzaSyBIBVb-0Z0QwaucMGOGy8-j_RM22X-4-lE")
+genai.configure(api_key="AIzaSyCoc7UW6p0Xj7At538R3oMYkfxG7bSLuaU")
 t=[ "Python", "Java", "C++", "JavaScript", "Ruby", "PHP", "Swift", "Kotlin", 
     "C#", "Go", "R", "TypeScript", "Scala", "Perl", "Objective-C", "Dart", 
     "Rust", "Haskell", "MATLAB", "SQL", "HTML/CSS", "React", "Angular", "Vue.js", 
