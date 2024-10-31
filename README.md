@@ -1,6 +1,13 @@
 # Study -Buddy
 ## Link : study--buddy.streamlit.app/
 ## docs : https://docs.google.com/document/d/1CzCxnSF3envflgGzZDzMO0wiRA5HsBr8/edit?usp=sharing&ouid=100040628657451799768&rtpof=true&sd=true
+## Getting Started
+
+### Prerequisites
+* **Python:** Ensure you have Python 3.7 or later installed.
+* **Streamlit:** Install Streamlit using pip:
+  ```bash
+  pip install streamlit
 ## Personalised Road Map 
 ![image](https://github.com/user-attachments/assets/98793a93-b9ed-4798-9f76-689c835f3e3b)
 ![image](https://github.com/user-attachments/assets/2a055789-1801-404b-a95a-de32bd04ef7b)
