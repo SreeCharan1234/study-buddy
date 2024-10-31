@@ -8,6 +8,13 @@
 * **Streamlit:** Install Streamlit using pip:
   ```bash
   pip install streamlit
+* **then :
+  ```bash
+  pip install -r requrnment.txt
+  streamlit run knowldgeBuilder.py
+
+
+  
 ## Personalised Road Map 
 ![image](https://github.com/user-attachments/assets/98793a93-b9ed-4798-9f76-689c835f3e3b)
 ![image](https://github.com/user-attachments/assets/2a055789-1801-404b-a95a-de32bd04ef7b)
