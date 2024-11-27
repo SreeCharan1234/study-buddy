@@ -31,8 +31,8 @@ import plotly.graph_objects as go
 import plotly.express as px
 global s
 k=0
-api_key="AIzaSyCoc7UW6p0Xj7At538R3oMYkfxG7bSLuaU"
-os.getenv("AIzaSyCoc7UW6p0Xj7At538R3oMYkfxG7bSLuaU")
+api_key="AIzaSyDwX2irhbT4LU8K8jhvFPHAaKp91qA3LLI"
+os.getenv("AIzaSyDwX2irhbT4LU8K8jhvFPHAaKp91qA3LLI")
 genai.configure(api_key="AIzaSyBIBVb-0Z0QwaucMGOGy8-j_RM22X-4-lE")
 t=[ "Python", "Java", "C++", "JavaScript", "Ruby", "PHP", "Swift", "Kotlin", 
     "C#", "Go", "R", "TypeScript", "Scala", "Perl", "Objective-C", "Dart", 
