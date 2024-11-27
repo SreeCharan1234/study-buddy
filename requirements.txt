@@ -1,4 +1,6 @@
 SpeechRecognition
+google-generativeai 
+python-dotenv 
 streamlit
 streamlit-ace
 streamlit-extras
@@ -13,5 +15,16 @@ youtube-transcript-api
 streamlit-option-menu
 streamlit-webrtc
 seaborn
+spacy
 streamlit_shadcn_ui
+langchain 
 PyPDF2
+faiss-cpu 
+poppler-utils
+requests_html
+streamlit-on-Hover-tabs
+httpx-oauth
+firebase-admin
+streamlit-authenticator
+youtube-transcript-api
+langchain_google_genai 
