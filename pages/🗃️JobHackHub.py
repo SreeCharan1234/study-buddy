@@ -23,8 +23,8 @@ from streamlit_extras.echo_expander import echo_expander
 from bs4 import BeautifulSoup
 global s
 k=0
-os.getenv("AIzaSyCoc7UW6p0Xj7At538R3oMYkfxG7bSLuaU")
-genai.configure(api_key="AIzaSyCoc7UW6p0Xj7At538R3oMYkfxG7bSLuaU")
+os.getenv('API-KEY')
+genai.configure(api_key='API-KEY')
 t=[ "Python", "Java", "C++", "JavaScript", "Ruby", "PHP", "Swift", "Kotlin", 
     "C#", "Go", "R", "TypeScript", "Scala", "Perl", "Objective-C", "Dart", 
     "Rust", "Haskell", "MATLAB", "SQL", "HTML/CSS", "React", "Angular", "Vue.js", 

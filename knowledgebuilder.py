@@ -26,8 +26,8 @@ from youtube_transcript_api import YouTubeTranscriptApi
 import time
 global s
 k=0
-os.getenv('API-KEY')
-genai.configure(api_key='API-KEY')
+os.getenv("AIzaSyAWDUMXlv5JWhQOqDuBHBu01WijtD0igBE")
+genai.configure(api_key="AIzaSyAWDUMXlv5JWhQOqDuBHBu01WijtD0igBE")
 t=[ "Python", "Java", "C++", "JavaScript", "Ruby", "PHP", "Swift", "Kotlin", 
     "C#", "Go", "R", "TypeScript", "Scala", "Perl", "Objective-C", "Dart", 
     "Rust", "Haskell", "MATLAB", "SQL", "HTML/CSS", "React", "Angular", "Vue.js", 
